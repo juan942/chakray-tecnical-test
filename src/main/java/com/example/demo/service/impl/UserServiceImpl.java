@@ -4,6 +4,8 @@ import com.example.demo.data.UserDataLoader;
 import com.example.demo.dto.request.UserCreateRequest;
 import com.example.demo.dto.request.UserPatchRequest;
 import com.example.demo.dto.response.UserResponse;
+import com.example.demo.exception.DuplicateTaxIdException;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.helper.UserCriteriaHelper;
 import com.example.demo.mapper.AddressMapper;
 import com.example.demo.mapper.UserMapper;
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse createUser(UserCreateRequest request) {
-        // Validate unique tax
+        validateUniqueTaxId(request.getTaxId(), null);
 
         User newUser = new User(
                 UUID.randomUUID(),
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
         User user = findUserById(id);
 
         if (request.getTaxId() != null && !request.getTaxId().isBlank()) {
-            // Validate unique tax
+            validateUniqueTaxId(request.getTaxId(),  user.getId());
             user.setTaxId(request.getTaxId());
         }
 
@@ -92,10 +94,26 @@ public class UserServiceImpl implements UserService {
         this.users.remove(matchUser);
     }
 
+    private void validateUniqueTaxId(String taxId, UUID currentId) {
+        boolean exist = this.users.stream()
+                .anyMatch(user -> user.getTaxId().equalsIgnoreCase(taxId) && !user.getId().equals(currentId));
+
+        if (exist)
+            throw new DuplicateTaxIdException("Tax ID already exists");
+    }
+
+    @Override
+    public User findUserByTaxId(String taxId) {
+        return this.users.stream()
+                .filter(u -> u.getTaxId().equalsIgnoreCase(taxId))
+                .findFirst()
+                .orElse(null);
+    }
+
     private User findUserById(UUID id) {
-        return users.stream()
+        return this.users.stream()
                 .filter((u) -> u.getId().equals(id))
                 .findFirst()
-                .orElse(new User());
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
     }
 }

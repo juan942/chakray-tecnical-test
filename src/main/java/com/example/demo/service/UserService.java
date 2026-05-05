@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.request.UserCreateRequest;
 import com.example.demo.dto.request.UserPatchRequest;
 import com.example.demo.dto.response.UserResponse;
+import com.example.demo.model.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,4 +16,6 @@ public interface UserService {
     UserResponse updateUser(UUID id, UserPatchRequest request);
 
     void deleteUser(UUID id);
+
+    User findUserByTaxId(String taxId);
 }
