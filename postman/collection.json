@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "70c3888c-eef8-4dbc-b0bb-e64513e11962",
+    "name": "Prueba Tecnica",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13686716",
+    "_collection_link": "https://go.postman.co/collection/13686716-70c3888c-eef8-4dbc-b0bb-e64513e11962?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/users",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"juancalero942@gmail.com\",\r\n  \"name\": \"Juan Carlos\",\r\n  \"phone\": \"+525588375852\",\r\n  \"password\": \"passwordjcch\",\r\n  \"taxId\": \"CAHJ0108J84\",\r\n  \"addresses\": [\r\n    {\r\n      \"id\": 32,\r\n      \"name\": \"principal\",\r\n      \"street\": \"Del valle No.123\",\r\n      \"countryCode\": \"MX\"\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/users",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"juancaleroupdat942@gmail.com\",\r\n  \"name\": \"Juan Carlos Calero\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/users/9d00af75-9072-4a1c-b471-409c7a280137",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users",
+            "9d00af75-9072-4a1c-b471-409c7a280137"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/users/9d00af75-9072-4a1c-b471-409c7a280137",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users",
+            "9d00af75-9072-4a1c-b471-409c7a280137"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Sorted List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/users?sortedBy=tax_id",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "sortedBy",
+              "value": "tax_id"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter List",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{host}}/users?filter=name+co+Carlos",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "users"
+          ],
+          "query": [
+            {
+              "key": "filter",
+              "value": "name+co+Carlos"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tax_id\": \"CAHJ0108J84\",\r\n  \"password\": \"passwordjcch\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{host}}/login",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
